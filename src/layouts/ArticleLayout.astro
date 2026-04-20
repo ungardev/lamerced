@@ -1,0 +1,79 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import { Button } from '@/components/ui/button'
+import { Calendar, User, ArrowLeft } from 'lucide-react'
+
+interface Props {
+  frontmatter: {
+    title: string
+    description: string
+    pubDate: Date
+    author: string
+    image?: string
+    tags?: string[]
+  }
+}
+
+const { frontmatter } = Astro.props
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description} article={true}>
+  <article class="section-padding">
+    <div class="container-custom max-w-4xl">
+      <!-- Back Link -->
+      <a href="/blog" class="inline-flex items-center gap-2 text-muted-foreground hover:text-accent-red mb-8 transition-colors">
+        <ArrowLeft className="w-4 h-4" />
+        <span>Volver al Blog</span>
+      </a>
+      
+      <!-- Header -->
+      <header class="mb-12">
+        <h1 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+          {frontmatter.title}
+        </h1>
+        <p class="text-xl text-muted-foreground mb-6">
+          {frontmatter.description}
+        </p>
+        
+        <!-- Meta -->
+        <div class="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+          <div class="flex items-center gap-2">
+            <Calendar className="w-4 h-4" />
+            <time datetime={frontmatter.pubDate.toISOString()}>
+              {frontmatter.pubDate.toLocaleDateString('es-VE', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+          </div>
+          <div class="flex items-center gap-2">
+            <User className="w-4 h-4" />
+            <span>{frontmatter.author}</span>
+          </div>
+        </div>
+      </header>
+      
+      <!-- Image -->
+      {frontmatter.image && (
+        <div class="mb-12 rounded-2xl overflow-hidden">
+          <img src={frontmatter.image} alt={frontmatter.title} class="w-full" />
+        </div>
+      )}
+      
+      <!-- Content -->
+      <div class="prose prose-lg max-w-none">
+        <slot />
+      </div>
+      
+      <!-- Tags -->
+      {frontmatter.tags && frontmatter.tags.length > 0 && (
+        <div class="mt-12 pt-8 border-t">
+          <div class="flex flex-wrap gap-2">
+            {frontmatter.tags.map((tag) => (
+              <span class="px-3 py-1 bg-secondary rounded-full text-sm text-muted-foreground">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </article>
+</BaseLayout>

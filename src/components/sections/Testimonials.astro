@@ -1,0 +1,115 @@
+---
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Star, Quote } from 'lucide-react'
+
+const testimonials = [
+  {
+    name: 'María González',
+    role: 'Egresada 2018, Universidad Católica Andrés Bello',
+    content: 'El Colegio La Merced me dio más que conocimientos académicos: me enseñó a pensar críticamente y a servir a los demás. Los valores que recibí son mi guía hasta hoy.',
+    year: '2018',
+  },
+  {
+    name: 'Carlos Mendoza',
+    role: 'Egresado 2015, Instituto de Estudios Superiores de Administración',
+    content: 'La formación en tecnología y valores que recibí en La Merced fue clave para mi desarrollo profesional. Siempre estaré agradecido por el ambiente de excelencia.',
+    year: '2015',
+  },
+  {
+    name: 'Ana Rodríguez',
+    role: 'Madre de estudiante, Promoción 2024',
+    content: 'Elegimos La Merced por su compromiso con la formación integral. Mi hija no solo ha destacado académicamente, sino que ha desarrollado un carácter sólido basado en valores.',
+    year: '2024',
+  },
+  {
+    name: 'Luis Pérez',
+    role: 'Egresado 2020, Universidad Simón Bolívar',
+    content: 'Los profesores always going the extra mile. La Merced me preparó para los desafíos de la universidad y me dio las herramientas para destacar en un entorno competitivo.',
+    year: '2020',
+  },
+]
+---
+
+<section id="testimonios" class="section-padding bg-gradient-to-b from-gray-50 via-white to-gray-50">
+  <div class="container-custom">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <span class="text-sm font-medium text-gold uppercase tracking-wider">Testimonios</span>
+      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6">
+        Voces que Respaldan Nuestra Excelencia
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        Conoce las experiencias de nuestros egresados y familias que forman parte de la familia mercedaria.
+      </p>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {testimonials.map((testimonial, index) => (
+        <Card class:list={[
+          "group relative overflow-hidden hover:border-gold/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 bg-white"
+        ]}>
+          <!-- Gold accent top border -->
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-gold to-accent-red"></div>
+          
+          <!-- Quote Icon Background -->
+          <div class="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+            <Quote className="w-16 h-16 text-gold" />
+          </div>
+          
+          <CardHeader className="relative z-10">
+            <!-- Stars -->
+            <div class="flex gap-1 mb-4">
+              {[...Array(5)].map(() => (
+                <Star className="w-4 h-4 fill-gold text-gold" />
+              ))}
+            </div>
+            <p class="text-lg text-foreground font-medium leading-relaxed">
+              "{testimonial.content}"
+            </p>
+          </CardHeader>
+          
+          <CardContent className="relative z-10 pt-0">
+            <div class="flex items-center gap-4">
+              <!-- Avatar with gold border -->
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent-red to-red-700 flex items-center justify-center shadow-lg ring-2 ring-gold group-hover:scale-110 transition-transform duration-300">
+                <span class="text-white font-semibold">
+                  {testimonial.name.charAt(0)}
+                </span>
+              </div>
+              <div>
+                <div class="font-semibold text-foreground">{testimonial.name}</div>
+                <div class="text-sm text-muted-foreground">{testimonial.role}</div>
+              </div>
+              <div class="ml-auto">
+                <span class="text-sm font-medium text-gold bg-gold/10 px-3 py-1 rounded-full">
+                  '{testimonial.year}
+                </span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+
+    <!-- Stats with gold accents -->
+    <div class="mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+      <div class="text-center p-4 md:p-6 bg-white rounded-xl shadow-md border-t-4 border-gold hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+        <div class="font-serif text-2xl md:text-4xl font-bold text-gold mb-1 md:mb-2">95%</div>
+        <div class="text-xs md:text-sm text-muted-foreground">Ingresan a Universidad</div>
+      </div>
+      <div class="text-center p-4 md:p-6 bg-white rounded-xl shadow-md border-t-4 border-accent-red hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+        <div class="font-serif text-2xl md:text-4xl font-bold text-accent-red mb-1 md:mb-2">90%</div>
+        <div class="text-xs md:text-sm text-muted-foreground">Becas Otorgadas</div>
+      </div>
+      <div class="text-center p-4 md:p-6 bg-white rounded-xl shadow-md border-t-4 border-gold hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+        <div class="font-serif text-2xl md:text-4xl font-bold text-gold mb-1 md:mb-2">85%</div>
+        <div class="text-xs md:text-sm text-muted-foreground">Premios Académicos</div>
+      </div>
+      <div class="text-center p-4 md:p-6 bg-white rounded-xl shadow-md border-t-4 border-accent-red hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+        <div class="font-serif text-2xl md:text-4xl font-bold text-accent-red mb-1 md:mb-2">100%</div>
+        <div class="text-xs md:text-sm text-muted-foreground">Satisfacción Familiar</div>
+      </div>
+    </div>
+  </div>
+</section>

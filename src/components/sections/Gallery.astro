@@ -1,0 +1,103 @@
+---
+import { Camera, Building, GraduationCap, Users as UsersIcon, Calendar, Heart } from 'lucide-react'
+
+const galleryItems = [
+  {
+    image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZcmD3hr2EyN2-xmN8lZyIh28gKtunKIWQfnZlDSKLYOoEwTpsAbNdeIPcznVTU2KcxFUfMdQJSHPm_VVE8XskIEHyWEnIOdw_-91NSMGtU2s68oSlnCzTdCYfeZxe6Pp8o91NDm_t_WXZ3ROWw82nwSvKWTOlyNmweMfuMpQ66yTHQeKVDpulTVEuEJCG/s1280/WhatsApp%20Image%202024-11-04%20at%2014.04.46.jpeg",
+    title: "Nuestras Instalaciones",
+    description: "Espacios diseñados para el aprendizaje integral",
+  },
+  {
+    image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxCo6C64M6bCgXkgpcQHEwWlThJPst03_q7LA5X9OMLrCTX_QitVbj9tavdKXvjmso8omBOsnIEhHlSAecpJ3lwrIJ65jW0CNJ0r9VHowEi1VFeHXqQhcqNhzkmxMA9KyZBxL5mH1Dqpq6Vja8X8c55Ly06AYr2bpGcNsdqsrkluthjfRIZ_PF8qBq_omj/s554/WhatsApp%20Image%202024-11-04%20at%2014.04.33%20%281%29.jpeg",
+    title: "Historia y Tradición",
+    description: "70 años de trayectoria educativa en Caraballeda",
+  },
+  {
+    image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-fY_wg6QY0EBtoAEwWj9qlHwOf07J7dJhXdpdSjiNB_kqNnTxZlcrNKxRcla6ztLaYo6LCoOB8HbM1ML_3xvCV1mMMFo8htD3LEk_hW0ZxSADnOueKd9lJGSHO3S0ywxCga-ljj3G7-lIohA3RV722smdVUDzQZjVRNOrv_7Nhab0fm0__j8j-Vud8PGq/s16000/WhatsApp%20Image%202024-11-04%20at%2013.55.30.jpeg",
+    title: "Comunidad Educativa",
+    description: "456 estudiantes desde Inicial hasta Media General",
+  },
+  {
+    image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRYEytcW9N-8eHDJt3v15RtI_imsIdFXLkMvE98KEfU4nLk-D76S1NM6lE2km_zbbHbVLuP4XIQcUwQe_PKXBuNYEayYFAHvPPQmaIrfQBh8fqbgJmKIHMoDVtFaicNPqBt7XMET8D0BR6Si9pmukxbEgcj03lpInJbVDRheGhx1FuC3ouruTclmyIPBcY/s720/WhatsApp%20Image%202024-11-14%20at%2018.46.23.jpeg",
+    title: "Escudo Institucional",
+    description: "Símbolo de identidad mercedaria",
+  },
+]
+
+const features = [
+  {
+    icon: Building,
+    title: "Infraestructura",
+    description: "Desde 1958 en nuestras actuales instalaciones",
+  },
+  {
+    icon: GraduationCap,
+    title: "Egresados",
+    description: "Más de 69 promociones de bachilleres",
+  },
+  {
+    icon: UsersIcon,
+    title: "Comunidad",
+    description: "Directora Prof. Elsa Chayele y equipo comprometido",
+  },
+  {
+    icon: Heart,
+    title: "Carisma Mercedario",
+    description: "Fundado por las Hermanas Mercedarias de España",
+  },
+]
+---
+
+<section id="galeria" class="section-padding bg-gradient-to-b from-gray-50 via-white to-gray-50 w-full max-w-full overflow-hidden">
+  <div class="container-custom w-full max-w-full">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <span class="text-sm font-medium text-accent-red uppercase tracking-wider">Galería</span>
+      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6">
+        Nuestra Historia en Imágenes
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-accent-red via-gold to-accent-red mx-auto mb-6 rounded-full"></div>
+<p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        Setenta años de trayectoria educativa formando estudiantes con valores cristianos y preparándolos para un futuro exitoso.
+      </p>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+      {galleryItems.map((item, index) => (
+        <div class:list={[
+          "group relative overflow-hidden rounded-2xl",
+          index === 0 ? "md:col-span-2 aspect-[2/1]" : "aspect-square"
+        ]}>
+          <img 
+            src={item.image}
+            alt={item.title}
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <h3 class="font-serif text-xl md:text-2xl font-bold text-white mb-1">{item.title}</h3>
+              <p class="text-white/80 text-sm">{item.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Features -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {features.map((feature, index) => (
+        <div class="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-md hover:border-gold/50 transition-all duration-300 group hover:-translate-y-1">
+          <div class:list={[
+            "w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110",
+            index % 2 === 0 ? "bg-accent-red" : "bg-gold"
+          ]}>
+            <feature.icon className="w-7 h-7 text-white" />
+          </div>
+          <h3 class="font-serif text-lg font-semibold text-foreground mb-2 group-hover:text-accent-red transition-colors duration-300">{feature.title}</h3>
+          <p class="text-sm text-muted-foreground">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

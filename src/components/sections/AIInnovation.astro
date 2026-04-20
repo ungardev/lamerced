@@ -1,0 +1,91 @@
+---
+import { Bot, Brain, Code, Sparkles, GraduationCap, Laptop } from 'lucide-react'
+
+const innovations = [
+  {
+    icon: Brain,
+    title: 'IA para el Aprendizaje',
+    description: 'Asistentes inteligentes que personalizan la experiencia educativa según el ritmo de cada estudiante.',
+  },
+  {
+    icon: Code,
+    title: 'Programación & Robótica',
+    description: 'Introducción al código desde los primeros niveles, desarrollando pensamiento computacional y resolución de problemas.',
+  },
+  {
+    icon: Laptop,
+    title: 'Aulas Digitales',
+    description: 'Pizarras interactivas, tablets y recursos digitales integrados en cada sesión de clase.',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Biblioteca Digital',
+    description: 'Acceso a recursos académicos internacionales y bases de datos especializadas.',
+  },
+  {
+    icon: Bot,
+    title: 'Asesoría Virtual',
+    description: 'Tutorías y seguimiento académico disponible de forma remota.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Proyectos Innovadores',
+    description: 'Concursos de innovación y ferias científicas que fomentan la creatividad y curiosidad.',
+  },
+]
+---
+
+<section id="innovacion" class="section-padding bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden">
+  <!-- Glassmorphism Background Elements -->
+  <div class="absolute inset-0">
+    <div class="absolute top-20 left-1/4 w-96 h-96 bg-accent-red/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-1/4 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>
+  </div>
+  
+  <div class="container-custom relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <span class="text-sm font-medium text-accent-red uppercase tracking-wider">Innovación</span>
+      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6">
+        Tecnología al Servicio de la Educación
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        Integra\-mos herramientas de inteligencia artificial y tecnología de vanguardia 
+        en nuestro currículo para preparar a los estudiantes para el futuro.
+      </p>
+    </div>
+
+    <!-- Glass Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {innovations.map((item, index) => (
+        <div class="group glass rounded-2xl p-6 hover:border-gold/30 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden">
+          <!-- Subtle gradient overlay on hover -->
+          <div class="absolute inset-0 bg-gradient-to-br from-accent-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          
+          <div class="relative z-10">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-red to-red-700 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <item.icon className="w-6 h-6 text-white" />
+            </div>
+            <h3 class="font-serif text-xl font-semibold text-foreground mb-2 group-hover:text-accent-red transition-colors duration-300">
+              {item.title}
+            </h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-12 text-center">
+      <a href="#admisiones" class="inline-flex items-center gap-2 text-accent-red font-medium hover:underline">
+        <span>Descubre cómo transformamos la educación</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/>
+          <path d="m12 5 7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

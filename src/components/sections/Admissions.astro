@@ -1,0 +1,172 @@
+---
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { GraduationCap, Phone, Mail, Calendar, ArrowRight, CheckCircle2 } from 'lucide-react'
+
+const benefits = [
+  'Entrevista personalizada con la dirección',
+  'Tour guiado por nuestras instalaciones',
+  'Asesoría académica adaptada a su hijo/a',
+  'Matrícula con descuento early bird',
+]
+---
+
+<section id="admisiones" class="section-padding bg-gradient-to-b from-gray-50 via-white to-gray-50 w-full max-w-full overflow-hidden">
+  <div class="container-custom w-full max-w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 w-full max-w-full">
+      <!-- Left Column - Info -->
+      <div>
+        <span class="text-sm font-medium text-accent-red uppercase tracking-wider">Admisiones</span>
+        <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6">
+          Únete a la Familia Mercedaria
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-accent-red via-gold to-accent-red rounded-full mb-6"></div>
+        <p class="text-lg text-muted-foreground mb-8">
+          El proceso de admisión es simple y personalizado. Nos reunimos con cada familia para entender sus necesidades y mostrarles por qué La Merced es la mejor opción para sus hijos.
+        </p>
+
+        <!-- Benefits List -->
+        <div class="space-y-4 mb-8">
+          {benefits.map((benefit) => (
+            <div class="flex items-center gap-3">
+              <CheckCircle2 className="w-5 h-5 text-accent-red shrink-0" />
+              <span class="text-foreground">{benefit}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Contact Info -->
+        <div class="space-y-4 p-6 bg-white rounded-2xl border border-border shadow-sm hover:shadow-lg transition-shadow duration-300">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-accent-red/10 flex items-center justify-center">
+              <Phone className="w-6 h-6 text-accent-red" />
+            </div>
+            <div>
+              <div class="text-sm text-muted-foreground">Teléfono</div>
+              <div class="font-semibold text-foreground">0212-355-80-70</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center">
+              <Mail className="w-6 h-6 text-gold" />
+            </div>
+            <div>
+              <div class="text-sm text-muted-foreground">Email</div>
+              <div class="font-semibold text-foreground">colegiolamerced@caraballeda@gmail.com</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-accent-red/10 flex items-center justify-center">
+              <Calendar className="w-6 h-6 text-accent-red" />
+            </div>
+            <div>
+              <div class="text-sm text-muted-foreground">Horario de Atención</div>
+              <div class="font-semibold text-foreground">Lun-Vie: 7:00 AM - 4:00 PM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Form -->
+      <div class="bg-white rounded-2xl border border-border shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300">
+        <div class="flex items-center gap-3 mb-8">
+          <GraduationCap className="w-8 h-8 text-accent-red" />
+          <h3 class="font-serif text-2xl font-semibold text-foreground">
+            Solicitud de Información
+          </h3>
+        </div>
+
+        <form 
+          class="space-y-6" 
+          id="admissions-form"
+          action="https://formspree.io/f/your-form-id" 
+          method="POST"
+        >
+          <!-- Parent Name -->
+          <div class="space-y-2">
+            <Label htmlFor="parentName">Nombre del Representante *</Label>
+            <Input 
+              id="parentName" 
+              name="parentName" 
+              placeholder="Ingrese su nombre completo" 
+              required
+              className="transition-all duration-300 focus:border-gold focus:ring-gold/20"
+            />
+          </div>
+
+          <!-- Email -->
+          <div class="space-y-2">
+            <Label htmlFor="email">Correo Electrónico *</Label>
+            <Input 
+              id="email" 
+              name="email" 
+              type="email"
+              placeholder="correo@ejemplo.com" 
+              required
+              className="transition-all duration-300 focus:border-gold focus:ring-gold/20"
+            />
+          </div>
+
+          <!-- Phone -->
+          <div class="space-y-2">
+            <Label htmlFor="phone">Teléfono *</Label>
+            <Input 
+              id="phone" 
+              name="phone" 
+              type="tel"
+              placeholder="0412-123-4567" 
+              required
+              className="transition-all duration-300 focus:border-gold focus:ring-gold/20"
+            />
+          </div>
+
+          <!-- Student Level - Using native select for SSR compatibility -->
+          <div class="space-y-2">
+            <Label htmlFor="level">Nivel Educativo del Estudiante *</Label>
+            <select 
+              id="level"
+              name="level"
+              required
+              class="flex h-11 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300"
+            >
+              <option value="">Seleccione el nivel</option>
+              <option value="inicial">Educación Inicial (3-5 años)</option>
+              <option value="primaria">Primaria (1er-6to grado)</option>
+              <option value="media">Educación Media (7mo-4to año)</option>
+            </select>
+          </div>
+
+          <!-- Message -->
+          <div class="space-y-2">
+            <Label htmlFor="message">Mensaje (Opcional)</Label>
+            <Textarea 
+              id="message" 
+              name="message"
+              placeholder="Cuéntenos sobre su hijo/a y sus intereses..." 
+              rows={4}
+              className="transition-all duration-300 focus:border-gold focus:ring-gold/20"
+            />
+          </div>
+
+          <!-- Submit Button -->
+          <Button 
+            type="submit" 
+            variant="gold" 
+            size="lg" 
+            className="w-full group"
+          >
+            <span>Enviar Solicitud</span>
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          </Button>
+
+          <p class="text-xs text-muted-foreground text-center">
+            Al enviar este formulario, acepta nuestra política de privacidad.
+            Nos pondremos en contacto en un plazo de 24-48 horas.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

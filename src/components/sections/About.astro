@@ -1,0 +1,73 @@
+---
+const stats = [
+  { value: '69+', label: 'Años de Trayectoria' },
+  { value: '456', label: 'Estudiantes Activos' },
+  { value: '3', label: 'Niveles Académicos' },
+  { value: '1955', label: 'Año de Fundación' },
+]
+---
+
+<section id="nosotros" class="section-padding bg-gradient-to-b from-white via-gray-50 to-white w-full max-w-full overflow-hidden">
+  <div class="container-custom w-full max-w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center w-full max-w-full">
+      <!-- Image Side with Blog Image -->
+      <div class="relative">
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-gold/20">
+          <img 
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxCo6C64M6bCgXkgpcQHEwWlThJPst03_q7LA5X9OMLrCTX_QitVbj9tavdKXvjmso8omBOsnIEhHlSAecpJ3lwrIJ65jW0CNJ0r9VHowEi1VFeHXqQhcqNhzkmxMA9KyZBxL5mH1Dqpq6Vja8X8c55Ly06AYr2bpGcNsdqsrkluthjfRIZ_PF8qBq_omj/s554/WhatsApp%20Image%202024-11-04%20at%2014.04.33%20%281%29.jpeg"
+            alt="Instalaciones del Colegio La Merced - 1958"
+            class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+          />
+          <!-- Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-accent-red/30 to-transparent"></div>
+        </div>
+        
+        <!-- Floating stat card with gold accent -->
+        <div class="absolute -bottom-4 -right-4 md:-right-12 lg:right-[-3rem] bg-white rounded-2xl shadow-xl p-4 md:p-6 w-40 md:w-48 border-t-4 border-gold animate-float">
+          <div class="text-center">
+            <div class="font-serif text-3xl md:text-4xl font-bold text-gold mb-1">69+</div>
+            <div class="text-xs md:text-sm text-muted-foreground">Años formando líderes</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Side -->
+      <div>
+        <span class="text-sm font-medium text-gold uppercase tracking-wider">Nuestra História</span>
+        <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6">
+          Tradición Mercedaria
+        </h2>
+        
+        <div class="space-y-4 text-muted-foreground mb-8">
+          <p>
+            El <strong class="text-accent-red">U.E.P. Colegio "La Merced"</strong> fue fundado el <strong class="text-accent-red">25 de febrero de 1955</strong> en Caraballeda, 
+            Estado La Guaira, por las <strong>Hermanas Mercedarias</strong> originarias de España.
+          </p>
+          <p>
+            Nuestra historia comienza cuando la Sra. Melanie Branger, devota de la Virgen de La Merced, 
+            solicitó la ayuda de religiosas de esta orden. Así llegaron las primeras Hermanas: 
+            María del Espíritu Santo Cama, María Amparo Arbunies y María Sacramento Moral Ortega.
+          </p>
+          <p>
+            En 1958 nos mudamos al espacio actual. A partir de 1974 iniciamos la formación de Bachilleres, 
+            egresando en 1980 la I Promoción. En 1992 abrimos las puertas a estudiantes varones.
+          </p>
+          <p>
+            Actualmente atendemos a <strong class="text-accent-red">456 estudiantes</strong> de ambos sexos, desde Nivel Inicial hasta Educación Media General, 
+            bajo la dirección de la <strong>Prof. Elsa Chayele</strong>.
+          </p>
+        </div>
+
+        <!-- Stats with gold accents -->
+        <div class="grid grid-cols-2 gap-4">
+          {stats.map((stat) => (
+            <div class="p-4 bg-white rounded-xl border border-gold/20 shadow-sm hover:shadow-md hover:border-gold/40 transition-all duration-300 cursor-pointer hover:-translate-y-1">
+              <div class="font-serif text-2xl md:text-3xl font-bold text-gold mb-1">{stat.value}</div>
+              <div class="text-sm text-muted-foreground">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

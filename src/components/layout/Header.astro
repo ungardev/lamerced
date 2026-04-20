@@ -1,0 +1,102 @@
+---
+interface Props {
+  variant?: 'transparent' | 'solid'
+}
+
+const { variant = 'transparent' } = Astro.props
+
+const navLinks = [
+  { label: 'Nosotros', href: '/#nosotros' },
+  { label: 'Valores', href: '/#valores' },
+  { label: 'Galería', href: '/#galeria' },
+  { label: 'Testimonios', href: '/#testimonios' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Admisiones', href: '/#admisiones', highlight: true },
+]
+---
+
+<header 
+  class:list={[
+    "fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-hidden",
+    variant === 'transparent' ? "bg-transparent" : "bg-white/95 backdrop-blur-md shadow-sm"
+  ]}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+    <div class="flex items-center justify-between h-16 md:h-24">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 md:gap-3 group">
+        <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-accent-red flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+          <span class="text-white font-serif text-xl md:text-2xl font-bold">M</span>
+        </div>
+        <span class="font-serif text-lg md:text-2xl lg:text-3xl font-bold text-foreground">
+          U.E.P. Colegio "<span class="text-accent-red">La Merced</span>"
+        </span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-8">
+        {navLinks.map((link) => (
+          <a 
+            href={link.href}
+            class:list={[
+              "text-sm font-medium transition-all duration-200",
+              link.highlight 
+                ? "bg-accent-red text-white px-4 py-2 rounded-lg hover:text-gold" 
+                : "text-foreground hover:text-accent-red"
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button 
+        class="lg:hidden p-2 text-foreground"
+        aria-label="Menu"
+        id="mobile-menu-btn"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" x2="20" y1="12" y2="12"/>
+          <line x1="4" x2="20" y1="6" y2="6"/>
+          <line x1="4" x2="20" y1="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Panel -->
+  <div id="mobile-menu" class="lg:hidden hidden bg-white border-t w-full">
+    <div class="px-4 py-4 space-y-2 w-full max-w-full">
+      {navLinks.map((link) => (
+        <a 
+          href={link.href}
+          class:list={[
+            "block py-3 px-4 rounded-lg text-sm font-medium transition-all duration-200",
+            link.highlight 
+              ? "bg-accent-red text-white text-center hover:text-gold" 
+              : "text-foreground hover:bg-secondary"
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn')
+  const mobileMenu = document.getElementById('mobile-menu')
+  const menuLinks = mobileMenu?.querySelectorAll('a')
+  
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden')
+  })
+  
+  menuLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden')
+    })
+  })
+</script>

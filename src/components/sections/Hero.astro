@@ -1,0 +1,59 @@
+---
+import { Button } from '@/components/ui/button'
+---
+
+<section class="relative min-h-screen flex items-start justify-center overflow-hidden bg-gradient-to-b from-white via-gray-50 to-gray-100 w-full max-w-full">
+  <div class="absolute inset-0 z-0">
+    <img 
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-fY_wg6QY0EBtoAEwWj9qlHwOf07J7dJhXdpdSjiNB_kqNnTxZlcrNKxRcla6ztLaYo6LCoOB8HbM1ML_3xvCV1mMMFo8htD3LEk_hW0ZxSADnOueKd9lJGSHO3S0ywxCga-ljj3G7-lIohA3RV722smdVUDzQZjVRNOrv_7Nhab0fm0__j8j-Vud8PGq/s16000/WhatsApp%20Image%202024-11-04%20at%2013.55.30.jpeg" 
+      alt="Comunidad Educativa"
+      class="w-full h-full object-cover opacity-15"
+    />
+  </div>
+  
+  <div class="absolute inset-0 z-0 bg-grid-pattern opacity-30"></div>
+  
+  <div class="absolute top-20 left-10 w-72 h-72 bg-accent-red/5 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-20 right-10 w-96 h-96 bg-gold/5 rounded-full blur-3xl"></div>
+  
+  <div class="relative z-10 max-w-5xl mx-auto px-4 md:px-8 w-full text-center pt-24 md:pt-40">
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-gold/20 text-accent-red text-sm font-medium mb-6">
+      <span class="w-2 h-2 rounded-full bg-accent-red"></span>
+      <span>Fundado en 1955 • Caraballeda, Edo. La Guaira</span>
+    </div>
+    
+    <h1 class="font-serif text-4xl md:text-5xl lg:text-8xl font-bold text-foreground leading-tight mb-6">
+      U.E.P. Colegio
+      <br/>
+      <span class="text-accent-red">"La Merced"</span>
+    </h1>
+    
+    <p class="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+      Educación de calidad desde 1955. Formación integral basada en el carisma mercedario: 
+      solidaridad, respeto, justicia y servicio. Desde Nivel Inicial hasta Educación Media General.
+    </p>
+    
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#admisiones">
+        <Button variant="gold" size="lg">
+          Solicitar Admisión
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/>
+            <path d="m12 5 7 7-7 7"/>
+          </svg>
+        </Button>
+      </a>
+      <a href="#valores">
+        <Button variant="outline" size="lg">
+          Conocer Más
+        </Button>
+      </a>
+    </div>
+  </div>
+  
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground">
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+  </div>
+</section>

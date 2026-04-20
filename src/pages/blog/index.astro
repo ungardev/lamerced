@@ -1,0 +1,64 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Calendar, ArrowRight } from 'lucide-react'
+import { getCollection } from 'astro:content'
+
+const posts = await getCollection('blog')
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+---
+
+<BaseLayout title="Blog" description="Noticias y actualizaciones del U.E.P. Colegio La Merced">
+  <section class="section-padding bg-gradient-to-b from-gray-50 via-white to-gray-50 w-full max-w-full overflow-hidden">
+    <div class="container-custom w-full max-w-full">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <span class="text-sm font-medium text-accent-red uppercase tracking-wider">Blog</span>
+        <h1 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6">
+          Noticias y Actualizaciones
+        </h1>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Mantente informado sobre las últimas noticias, eventos y logros de nuestra comunidad educativa.
+        </p>
+      </div>
+
+      <!-- Posts Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortedPosts.map((post) => (
+          <a href={`/blog/${post.slug}`}>
+            <Card class="h-full group hover:border-gold/30 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              <CardHeader>
+                <div class="text-sm text-muted-foreground mb-2 flex items-center gap-2">
+                  <Calendar class="w-4 h-4" />
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString('es-VE', { year: 'numeric', month: 'short', day: 'numeric' })}
+                  </time>
+                </div>
+                <CardTitle class="text-xl group-hover:text-accent-red transition-colors duration-300">
+                  {post.data.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p class="text-muted-foreground mb-4 line-clamp-3">
+                  {post.data.description}
+                </p>
+                <div class="inline-flex items-center gap-2 text-accent-red font-medium">
+                  <span>Leer más</span>
+                  <ArrowRight class="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </div>
+              </CardContent>
+            </Card>
+          </a>
+        ))}
+      </div>
+
+      {sortedPosts.length === 0 && (
+        <div class="text-center py-16">
+          <p class="text-muted-foreground text-lg">
+            Próximamente más noticias y actualizaciones.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
