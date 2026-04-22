@@ -3,82 +3,27 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { GraduationCap, Phone, Mail, Calendar, ArrowRight, CheckCircle2 } from 'lucide-react'
-
-const benefits = [
-  'Entrevista personalizada con la dirección',
-  'Tour guiado por nuestras instalaciones',
-  'Asesoría académica adaptada a su hijo/a',
-  'Matrícula con descuento early bird',
-]
+import { GraduationCap, ArrowRight } from 'lucide-react'
 ---
 
 <section id="admisiones" class="section-padding bg-gradient-to-b from-gray-50 via-white to-gray-50 w-full max-w-full overflow-hidden">
   <div class="container-custom w-full max-w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 w-full max-w-full">
-      <!-- Left Column - Info -->
-      <div>
+    <div class="max-w-2xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-12">
         <span class="text-sm font-medium text-accent-red uppercase tracking-wider">Admisiones</span>
         <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-6">
-          Únete a la Familia Mercedaria
+          Solicitud de Información
         </h2>
-        <div class="w-24 h-1 bg-gradient-to-r from-accent-red via-gold to-accent-red rounded-full mb-6"></div>
-        <p class="text-lg text-muted-foreground mb-8">
-          El proceso de admisión es simple y personalizado. Nos reunimos con cada familia para entender sus necesidades y mostrarles por qué La Merced es la mejor opción para sus hijos.
+        <div class="w-24 h-1 bg-gradient-to-r from-accent-red via-gold to-accent-red rounded-full mx-auto mb-6"></div>
+        <p class="text-lg text-muted-foreground max-w-xl mx-auto">
+          Complete el formulario y nos pondremos en contacto con usted en un plazo de 24-48 horas.
         </p>
-
-        <!-- Benefits List -->
-        <div class="space-y-4 mb-8">
-          {benefits.map((benefit) => (
-            <div class="flex items-center gap-3">
-              <CheckCircle2 className="w-5 h-5 text-accent-red shrink-0" />
-              <span class="text-foreground">{benefit}</span>
-            </div>
-          ))}
-        </div>
-
-        <!-- Contact Info -->
-        <div class="space-y-4 p-6 bg-white rounded-2xl border border-border shadow-sm hover:shadow-lg transition-shadow duration-300">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-accent-red/10 flex items-center justify-center">
-              <Phone className="w-6 h-6 text-accent-red" />
-            </div>
-            <div>
-              <div class="text-sm text-muted-foreground">Teléfono</div>
-              <div class="font-semibold text-foreground">0212-355-80-70</div>
-            </div>
-          </div>
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center">
-              <Mail className="w-6 h-6 text-gold" />
-            </div>
-            <div>
-              <div class="text-sm text-muted-foreground">Email</div>
-              <div class="font-semibold text-foreground">colegiolamerced@gmail.com</div>
-            </div>
-          </div>
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-accent-red/10 flex items-center justify-center">
-              <Calendar className="w-6 h-6 text-accent-red" />
-            </div>
-            <div>
-              <div class="text-sm text-muted-foreground">Horario de Atención</div>
-              <div class="font-semibold text-foreground">Lun-Vie: 7:00 AM - 4:00 PM</div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <!-- Right Column - Form -->
-      <div class="bg-white rounded-2xl border border-border shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300">
-        <div class="flex items-center gap-3 mb-8">
-          <GraduationCap className="w-8 h-8 text-accent-red" />
-          <h3 class="font-serif text-2xl font-semibold text-foreground">
-            Solicitud de Información
-          </h3>
-        </div>
-
-        <form 
+        <!-- Form Card -->
+        <div class="bg-white rounded-2xl border border-border shadow-xl p-8 hover:shadow-2xl transition-shadow duration-300">
+          <form 
           class="space-y-6" 
           id="admissions-form"
           action="https://formspree.io/f/your-form-id" 
