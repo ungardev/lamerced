@@ -84,35 +84,37 @@ const navLinksMobile = [
   class="lg:hidden hidden fixed inset-0 z-50"
 >
   <!-- Backdrop semitransparente -->
-  <div id="mobile-backdrop" class="absolute inset-0 bg-white/95 backdrop-blur-lg"></div>
+  <div id="mobile-backdrop" class="absolute inset-0 bg-white/95 backdrop-blur-lg opacity-0"></div>
   
   <!-- Contenido -->
-  <div class="relative z-10">
+  <div class="relative z-10 h-full">
     <!-- Close Button - Unicode X, Simple and Clean -->
     <button 
       id="close-menu-btn"
-      class="fixed top-4 right-4 z-50 w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-lg text-2xl text-gray-700 hover:bg-gray-100 hover:scale-110 transition-all duration-200"
+      class="fixed top-4 right-4 z-50 w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-lg text-2xl text-gray-700 hover:bg-gray-100 hover:scale-110 transition-all duration-200 opacity-0"
       aria-label="Cerrar menú"
     >
       ✕
     </button>
 
-    <!-- Menu Content -->
-    <div class="px-6 pt-20 pb-8">
-      <nav class="flex flex-col space-y-4">
-        {navLinksMobile.map((link, index) => (
-          <a 
-            href={link.href}
-            class:list={[
-              "mobile-link block py-5 px-6 rounded-2xl text-lg font-sans font-semibold text-center transition-all duration-300 transform shadow-md",
-              "bg-accent-red text-white hover:bg-red-700 hover:shadow-xl hover:scale-[1.02]"
-            ]}
-            style={`--index: ${index}; --delay: ${index * 80}ms`}
-          >
-            {link.label}
-          </a>
-        ))}
-      </nav>
+    <!-- Menu Content - Slide from right -->
+    <div id="menu-panel" class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform translate-x-full">
+      <div class="px-6 pt-20 pb-8">
+        <nav class="flex flex-col space-y-4">
+          {navLinksMobile.map((link, index) => (
+            <a 
+              href={link.href}
+              class:list={[
+                "mobile-link block py-5 px-6 rounded-2xl text-lg font-sans font-semibold text-center transition-all duration-300 transform shadow-md",
+                "bg-accent-red text-white hover:bg-red-700 hover:shadow-xl hover:scale-[1.02]"
+              ]}
+              style={`--index: ${index}; --delay: ${index * 80}ms`}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
     </div>
   </div>
 </div>
@@ -145,6 +147,117 @@ const navLinksMobile = [
   }
 
   .mobile-menu-open .mobile-link {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* ========== MOBILE MENU ANIMATIONS ========== */
+
+  /* Backdrop enter */
+  @keyframes backdropIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Backdrop leave */
+  @keyframes backdropOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  /* Panel slide in from right */
+  @keyframes panelSlideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  /* Panel slide out to right */
+  @keyframes panelSlideOut {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Close button rotation */
+  @keyframes closeBtnIn {
+    from {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  /* Close button rotation out */
+  @keyframes closeBtnOut {
+    from {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: rotate(90deg) scale(0.8);
+    }
+  }
+
+  /* Animation classes - Opening */
+  body.mobile-menu-opening #mobile-backdrop {
+    animation: backdropIn 0.3s ease-out forwards;
+  }
+
+  body.mobile-menu-opening #close-menu-btn {
+    animation: closeBtnIn 0.25s ease-out 0.15s forwards;
+  }
+
+  body.mobile-menu-opening #menu-panel {
+    animation: panelSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Animation classes - Closing */
+  body.mobile-menu-closing #mobile-backdrop {
+    animation: backdropOut 0.25s ease-in forwards;
+  }
+
+  body.mobile-menu-closing #close-menu-btn {
+    animation: closeBtnOut 0.2s ease-in forwards;
+  }
+
+  body.mobile-menu-closing #menu-panel {
+    animation: panelSlideOut 0.35s cubic-bezier(0.6, 0, 0.8, 1) forwards;
+  }
+
+  /* ========== MOBILE MENU OPEN STATE (Maintains visibility) ========== */
+  body.mobile-menu-open #mobile-backdrop {
+    opacity: 1;
+  }
+
+  body.mobile-menu-open #close-menu-btn {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  body.mobile-menu-open #menu-panel {
+    transform: translateX(0);
+  }
+
+  body.mobile-menu-open #menu-panel .mobile-link {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
@@ -228,23 +341,47 @@ const navLinksMobile = [
     // ========== MOBILE MENU ==========
     
     function openMenu() {
-      mobileMenu?.classList.remove('hidden')
-      body.classList.add('mobile-menu-open')
-      document.body.style.overflow = 'hidden'
+      if (!mobileMenu) return
       
-      // Trigger staggered animations
+      mobileMenu.classList.remove('hidden')
+      body.classList.add('mobile-menu-opening', 'mobile-menu-open')
+      body.style.overflow = 'hidden'
+      
+      // Trigger staggered animations after panel appears
       requestAnimationFrame(() => {
-        menuLinks?.forEach((link, index) => {
-          const el = link as HTMLElement
-          el.style.transitionDelay = `${index * 80}ms`
+        requestAnimationFrame(() => {
+          menuLinks?.forEach((link, index) => {
+            const el = link as HTMLElement
+            el.style.transitionDelay = `${200 + index * 60}ms`
+          })
         })
       })
+      
+      // After animation completes, switch to static open state
+      setTimeout(() => {
+        body.classList.remove('mobile-menu-opening')
+      }, 450)
     }
 
     function closeMenu() {
-      mobileMenu?.classList.add('hidden')
+      if (!mobileMenu) return
+      
+      // Remove open state and add closing animation
       body.classList.remove('mobile-menu-open')
+      body.classList.add('mobile-menu-closing')
       document.body.style.overflow = ''
+      
+      // Reset link delays for next open
+      menuLinks?.forEach((link) => {
+        const el = link as HTMLElement
+        el.style.transitionDelay = ''
+      })
+      
+      // Hide after animation completes
+      setTimeout(() => {
+        mobileMenu?.classList.add('hidden')
+        body.classList.remove('mobile-menu-closing')
+      }, 400)
     }
 
     // Event listeners
