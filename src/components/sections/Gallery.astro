@@ -136,47 +136,65 @@ const features = [
 </section>
 
 <script>
-  const track = document.getElementById('gallery-track');
-  const prevBtn = document.getElementById('gallery-prev');
-  const nextBtn = document.getElementById('gallery-next');
-  const dots = document.querySelectorAll('[data-dot]');
-  
-  let currentIndex = 0;
-  const totalSlides = 3;
-  const totalDots = 4;
-
-  function updateCarousel() {
-    if (!track) return;
-    const slideWidth = window.innerWidth >= 1024 ? 100 / 3 : window.innerWidth >= 768 ? 50 : 100;
-    track.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+  function initCarousel() {
+    const track = document.getElementById('gallery-track');
+    const prevBtn = document.getElementById('gallery-prev');
+    const nextBtn = document.getElementById('gallery-next');
+    const dotsContainer = document.getElementById('gallery-dots');
     
-    dots.forEach((dot, index) => {
-      if (index === currentIndex) {
-        dot.classList.add('bg-accent-red', 'w-6');
-        dot.classList.remove('bg-gray-300');
-      } else {
-        dot.classList.remove('bg-accent-red', 'w-6');
-        dot.classList.add('bg-gray-300');
-      }
-    });
-  }
+    if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+    
+    // Check if already initialized (prevent duplicate listeners)
+    if ((prevBtn as HTMLElement).hasAttribute('data-initialized')) return;
+    (prevBtn as HTMLElement).setAttribute('data-initialized', 'true');
+    (nextBtn as HTMLElement).setAttribute('data-initialized', 'true');
+    
+    const dots = dotsContainer.querySelectorAll('[data-dot]');
+    let currentIndex = 0;
+    const totalDots = dots.length;
 
-  prevBtn?.addEventListener('click', () => {
-    currentIndex = currentIndex > 0 ? currentIndex - 1 : totalDots - 1;
-    updateCarousel();
-  });
+    function updateCarousel() {
+      if (!track) return;
+      const slideWidth = window.innerWidth >= 1024 ? 100 / 3 : window.innerWidth >= 768 ? 50 : 100;
+      track.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+      
+      dots.forEach((dot, index) => {
+        if (index === currentIndex) {
+          dot.classList.add('bg-accent-red', 'w-6');
+          dot.classList.remove('bg-gray-300');
+        } else {
+          dot.classList.remove('bg-accent-red', 'w-6');
+          dot.classList.add('bg-gray-300');
+        }
+      });
+    }
 
-  nextBtn?.addEventListener('click', () => {
-    currentIndex = currentIndex < totalDots - 1 ? currentIndex + 1 : 0;
-    updateCarousel();
-  });
-
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-      currentIndex = index;
+    prevBtn.addEventListener('click', () => {
+      currentIndex = currentIndex > 0 ? currentIndex - 1 : totalDots - 1;
       updateCarousel();
     });
-  });
 
-  window.addEventListener('resize', updateCarousel);
+    nextBtn.addEventListener('click', () => {
+      currentIndex = currentIndex < totalDots - 1 ? currentIndex + 1 : 0;
+      updateCarousel();
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        currentIndex = parseInt((dot as HTMLElement).getAttribute('data-dot') || '0');
+        updateCarousel();
+      });
+    });
+
+    window.addEventListener('resize', updateCarousel);
+    
+    // Initial update
+    updateCarousel();
+  }
+
+  // Initialize on page load
+  initCarousel();
+
+  // Re-initialize after View Transitions
+  document.addEventListener('astro:after-swap', initCarousel);
 </script>
