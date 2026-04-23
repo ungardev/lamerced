@@ -20,8 +20,37 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-sans;
   }
+}
+
+/* Override free-astro-components colors - Institucional Red & Gold */
+:root {
+  --ac-primary: 206, 32, 41;  /* Rojo institucional #CE2029 */
+  --ac-secondary: 212, 175, 55; /* Dorado institucional #D4AF37 */
+}
+
+/* Fix: Button classes use DOUBLE dash (ac-btn--primary) not single */
+.ac-btn--primary { 
+  background-color: rgb(206, 32, 41) !important; 
+  border-color: rgb(206, 32, 41) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.ac-btn--primary:hover { 
+  background-color: rgb(180, 25, 35) !important; 
+  border-color: rgb(180, 25, 35) !important;
+}
+
+.ac-btn--secondary { 
+  background-color: rgb(212, 175, 55) !important; 
+  border-color: rgb(212, 175, 55) !important;
+  color: rgb(26, 26, 26) !important;
+}
+
+.ac-btn--secondary:hover { 
+  background-color: rgb(180, 150, 40) !important; 
+  border-color: rgb(180, 150, 40) !important;
 }
 
 @layer utilities {
@@ -181,6 +210,74 @@
 }
 
 @layer components {
+  /* Free Astro Components - Button Styles */
+  .ac-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+  }
+  
+  .ac-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  
+  .ac-btn-primary {
+    background-color: rgb(206, 32, 41);
+    color: white;
+  }
+  
+  .ac-btn-primary:hover:not(:disabled) {
+    background-color: rgb(180, 25, 35);
+  }
+  
+  .ac-btn-secondary {
+    background-color: rgb(212, 175, 55);
+    color: white;
+  }
+  
+  .ac-btn-secondary:hover:not(:disabled) {
+    background-color: rgb(180, 150, 40);
+  }
+  
+  .ac-btn-dark {
+    background-color: rgb(26, 26, 26);
+    color: white;
+  }
+  
+  .ac-btn-dark:hover:not(:disabled) {
+    background-color: rgb(60, 60, 60);
+  }
+  
+  .ac-btn-light {
+    background-color: rgb(248, 250, 252);
+    color: rgb(26, 26, 26);
+    border: 1px solid rgb(229, 231, 235);
+  }
+  
+  .ac-btn-light:hover:not(:disabled) {
+    background-color: rgb(241, 245, 249);
+  }
+  
+  .ac-btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .ac-btn-medium {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+  
   .btn-primary {
     @apply bg-accent-red text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-red-700 hover:scale-105;
   }

@@ -1,59 +1,141 @@
 ---
-import { Button } from '@/components/ui/button'
+import { Button } from 'free-astro-components'
+import { Image } from 'astro:assets'
+import heroImage from '@/assets/hero.avif'
 ---
 
-<section class="relative min-h-screen flex items-start justify-center overflow-hidden bg-gradient-to-b from-white via-gray-50 to-gray-100 w-full max-w-full">
+<section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-gray-50 to-gray-100 w-full max-w-full">
+  <!-- LCP Optimized Background Image with Astro Image component -->
   <div class="absolute inset-0 z-0">
-    <img 
-      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-fY_wg6QY0EBtoAEwWj9qlHwOf07J7dJhXdpdSjiNB_kqNnTxZlcrNKxRcla6ztLaYo6LCoOB8HbM1ML_3xvCV1mMMFo8htD3LEk_hW0ZxSADnOueKd9lJGSHO3S0ywxCga-ljj3G7-lIohA3RV722smdVUDzQZjVRNOrv_7Nhab0fm0__j8j-Vud8PGq/s16000/WhatsApp%20Image%202024-11-04%20at%2013.55.30.jpeg" 
-      alt="Comunidad Educativa"
-      class="w-full h-full object-cover opacity-15"
+    <Image 
+      src={heroImage}
+      alt="Comunidad Educativa La Merced - Campus Escolar Premium"
+      class="w-full h-full object-cover"
+      loading="eager"
+      decoding="sync"
+      widths={[640, 768, 1024, 1280, 1600]}
+      sizes="100vw"
+      quality={80}
+      format="avif"
     />
+    <!-- Gradient overlay: white to transparent for better text readability -->
+    <div class="absolute inset-0 bg-gradient-to-b from-white via-white/85 to-white/60"></div>
   </div>
   
-  <div class="absolute inset-0 z-0 bg-grid-pattern opacity-30"></div>
+  <!-- Subtle grid pattern -->
+  <div class="absolute inset-0 z-0 bg-grid-pattern opacity-10"></div>
   
-  <div class="absolute top-20 left-10 w-72 h-72 bg-accent-red/5 rounded-full blur-3xl"></div>
-  <div class="absolute bottom-20 right-10 w-96 h-96 bg-gold/5 rounded-full blur-3xl"></div>
+  <!-- Decorative orbs - subtle -->
+  <div class="absolute top-32 left-10 w-64 h-64 bg-accent-red/5 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-32 right-10 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>
   
-  <div class="relative z-10 max-w-5xl mx-auto px-4 md:px-8 w-full text-center pt-24 md:pt-40">
-    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-gold/20 text-accent-red text-sm font-medium mb-6">
-      <span class="w-2 h-2 rounded-full bg-accent-red"></span>
-      <span>Fundado en 1955 • Caraballeda, Edo. La Guaira</span>
+  <!-- Main content -->
+  <div class="relative z-10 max-w-4xl mx-auto px-6 w-full text-center">
+    <!-- Badge: Red text with gold border -->
+    <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/90 backdrop-blur-sm border border-gold/40 shadow-lg shadow-gold/5 mb-8">
+      <span class="w-2 h-2 rounded-full bg-accent-red animate-pulse shadow-sm"></span>
+      <span class="font-sans text-sm font-semibold text-accent-red tracking-wide">
+        Fundado en 1955 • Caraballeda, Edo. La Guaira
+      </span>
     </div>
     
-    <h1 class="font-serif text-4xl md:text-5xl lg:text-8xl font-bold text-foreground leading-tight mb-6">
+    <!-- Title: Playfair Display, balanced size -->
+    <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-medium text-foreground leading-tight mb-6 tracking-tight">
       U.E.P. Colegio
       <br/>
       <span class="text-accent-red">"La Merced"</span>
     </h1>
     
-    <p class="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-      Educación de calidad desde 1955. Formación integral basada en el carisma mercedario: 
-      solidaridad, respeto, justicia y servicio. Desde Nivel Inicial hasta Educación Media General.
+    <!-- Subtitle: One line, clear and readable -->
+    <p class="font-sans text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-10 leading-relaxed">
+      Formación integral basada en valores mercedarios: 
+      <span class="text-gray-800 font-normal">solidaridad, respeto, justicia y servicio</span>
     </p>
     
+    <!-- CTAs with hover effects -->
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
       <a href="#admisiones">
-        <Button variant="gold" size="lg">
-          Solicitar Admisión
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14"/>
-            <path d="m12 5 7 7-7 7"/>
-          </svg>
-        </Button>
+        <Button 
+          label="Solicitar Admisión" 
+          variant="primary" 
+          icon="arrow-right" 
+          iconPosition="right"
+          class="group hero-btn-primary"
+        />
       </a>
       <a href="#valores">
-        <Button variant="outline" size="lg">
-          Conocer Más
-        </Button>
+        <Button 
+          label="Conocer Más" 
+          variant="light" 
+          class="group hero-btn-secondary"
+        />
       </a>
     </div>
   </div>
   
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground">
-      <path d="m6 9 6 6 6-6"/>
-    </svg>
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+    <div class="w-6 h-10 rounded-full border-2 border-muted-foreground/20 flex items-start justify-center p-1">
+      <div class="w-1.5 h-2.5 bg-muted-foreground/40 rounded-full animate-bounce"></div>
+    </div>
   </div>
 </section>
+
+<style is:global>
+  /* Button hover effects - Elite micro-detail */
+  .ac-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .ac-btn svg {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .ac-btn:hover svg {
+    transform: translateX(2px);
+  }
+  
+  /* Primary button - Red */
+  .hero-btn-primary.ac-btn--primary,
+  .ac-btn--primary {
+    background-color: rgb(206, 32, 41) !important;
+    border-color: rgb(206, 32, 41) !important;
+    color: rgb(255, 255, 255) !important;
+    box-shadow: 0 4px 14px rgba(206, 32, 41, 0.3);
+  }
+  
+  .hero-btn-primary.ac-btn--primary:hover,
+  .ac-btn--primary:hover {
+    background-color: rgb(170, 25, 32) !important;
+    border-color: rgb(170, 25, 32) !important;
+    box-shadow: 0 6px 20px rgba(206, 32, 41, 0.4);
+    transform: translateY(-1px);
+  }
+  
+  /* Secondary button - Light gray with subtle border */
+  .hero-btn-secondary.ac-btn--light,
+  .ac-btn--light {
+    background-color: rgb(250, 250, 250) !important;
+    border-color: rgb(212, 212, 212) !important;
+    color: rgb(55, 65, 81) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+  
+  .hero-btn-secondary.ac-btn--light:hover,
+  .ac-btn--light:hover {
+    background-color: rgb(240, 240, 242) !important;
+    border-color: rgb(180, 180, 180) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  /* Gold gradient animation for badge */
+  @keyframes goldShine {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  
+  .animate-gold-shine {
+    animation: goldShine 2s ease-in-out infinite;
+  }
+</style>

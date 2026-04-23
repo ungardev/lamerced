@@ -1,0 +1,100 @@
+---
+// Lenis Smooth Scroll integration
+// This component adds smooth, premium scrolling to the site
+---
+
+<script>
+  import Lenis from 'lenis'
+
+  function initLenis() {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
+    })
+
+    function raf(time: number) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+
+    // Integrate with View Transitions
+    document.addEventListener('astro:after-swap', () => {
+      lenis.destroy()
+      const newLenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+        infinite: false,
+      })
+      
+      function rafNew(time: number) {
+        newLenis.raf(time)
+        requestAnimationFrame(rafNew)
+      }
+      
+      requestAnimationFrame(rafNew)
+    })
+  }
+
+  // Initialize on page load
+  initLenis()
+</script>
+
+<style is:global>
+  /* Smooth scroll CSS improvements */
+  html.lenis {
+    height: auto;
+  }
+  
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  /* Hide default scrollbar and style for cleaner look */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.accent-red') transparent;
+  }
+
+  /* Optional: Custom scrollbar for WebKit browsers */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.accent-red');
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a11920;
+  }
+</style>

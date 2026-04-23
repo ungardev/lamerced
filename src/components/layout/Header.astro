@@ -5,7 +5,7 @@ interface Props {
 
 const { variant = 'transparent' } = Astro.props
 
-const navLinks = [
+const navLinksDesktop = [
   { label: 'Nosotros', href: '/#nosotros' },
   { label: 'Valores', href: '/#valores' },
   { label: 'Galería', href: '/#galeria' },
@@ -13,90 +13,265 @@ const navLinks = [
   { label: 'Blog', href: '/blog' },
   { label: 'Admisiones', href: '/#admisiones', highlight: true },
 ]
+
+const navLinksMobile = [
+  { label: 'Home', href: '/' },
+  { label: 'Nosotros', href: '/#nosotros' },
+  { label: 'Valores', href: '/#valores' },
+  { label: 'Galería', href: '/#galeria' },
+  { label: 'Testimonios', href: '/#testimonios' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Admisiones', href: '/#admisiones', highlight: true },
+  { label: 'Contacto', href: '/#footer' },
+]
 ---
 
 <header 
-  class:list={[
-    "fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-hidden",
-    variant === 'transparent' ? "bg-transparent" : "bg-white/95 backdrop-blur-md shadow-sm"
-  ]}
+  id="main-header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gold/30"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-    <div class="flex items-center justify-between h-16 md:h-24">
-      <!-- Logo -->
+    <!-- Mobile: centered logo + hamburger right | Desktop: logo left + nav right -->
+    <div class="flex items-center justify-center lg:justify-start h-16 md:h-20">
+      
+      <!-- Logo - Centered on mobile, left on desktop -->
       <a href="/" class="flex items-center gap-2 md:gap-3 group">
-        <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-accent-red flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-          <span class="text-white font-serif text-xl md:text-2xl font-bold">M</span>
+        <div class="w-9 h-9 md:w-11 md:h-11 rounded-full bg-accent-red flex items-center justify-center transition-all duration-300">
+          <span class="text-white font-serif text-lg md:text-xl font-medium">M</span>
         </div>
-        <span class="font-serif text-lg md:text-2xl lg:text-3xl font-bold text-foreground">
-          U.E.P. Colegio "<span class="text-accent-red">La Merced</span>"
+        <span class="hidden lg:block font-serif text-lg md:text-xl lg:text-2xl font-medium text-gray-900">
+          U.E.P. Colegio <span class="text-accent-red">La Merced</span>
         </span>
       </a>
 
-      <!-- Desktop Navigation -->
-      <nav class="hidden lg:flex items-center gap-8">
-        {navLinks.map((link) => (
+      <!-- Desktop Navigation - Right side -->
+      <nav class="hidden lg:flex items-center gap-1 ml-auto">
+        {navLinksDesktop.map((link, index) => (
           <a 
             href={link.href}
             class:list={[
-              "text-sm font-medium transition-all duration-200",
+              "nav-link px-4 py-2 text-sm font-sans font-medium rounded-lg transition-all duration-200",
               link.highlight 
-                ? "bg-accent-red text-white px-4 py-2 rounded-lg hover:text-gold" 
-                : "text-foreground hover:text-accent-red"
+                ? "bg-accent-red text-white hover:bg-red-700 shadow-sm" 
+                : "text-gray-600 hover:text-accent-red hover:bg-gray-50"
             ]}
+            style={`--delay: ${index * 50}ms`}
           >
             {link.label}
           </a>
         ))}
       </nav>
 
-      <!-- Mobile Menu Button -->
+      <!-- Mobile Menu Button - Right side -->
       <button 
-        class="lg:hidden p-2 text-foreground"
-        aria-label="Menu"
+        class="lg:hidden absolute right-4 p-2 text-gray-700 hover:text-accent-red transition-colors"
+        aria-label="Abrir menú"
         id="mobile-menu-btn"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="4" x2="20" y1="12" y2="12"/>
-          <line x1="4" x2="20" y1="6" y2="6"/>
-          <line x1="4" x2="20" y1="18" y2="18"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" x2="21" y1="6" y2="6"/>
+          <line x1="3" x2="21" y1="12" y2="12"/>
+          <line x1="3" x2="21" y1="18" y2="18"/>
         </svg>
       </button>
     </div>
   </div>
-
-  <!-- Mobile Menu Panel -->
-  <div id="mobile-menu" class="lg:hidden hidden bg-white border-t w-full">
-    <div class="px-4 py-4 space-y-2 w-full max-w-full">
-      {navLinks.map((link) => (
-        <a 
-          href={link.href}
-          class:list={[
-            "block py-3 px-4 rounded-lg text-sm font-medium transition-all duration-200",
-            link.highlight 
-              ? "bg-accent-red text-white text-center hover:text-gold" 
-              : "text-foreground hover:bg-secondary"
-          ]}
-        >
-          {link.label}
-        </a>
-      ))}
-    </div>
-  </div>
 </header>
 
+<!-- Mobile Menu Panel - White with Backdrop -->
+<div 
+  id="mobile-menu" 
+  class="lg:hidden hidden fixed inset-0 z-50"
+>
+  <!-- Backdrop semitransparente -->
+  <div id="mobile-backdrop" class="absolute inset-0 bg-white/95 backdrop-blur-lg"></div>
+  
+  <!-- Contenido -->
+  <div class="relative z-10">
+    <!-- Close Button - Unicode X, Simple and Clean -->
+    <button 
+      id="close-menu-btn"
+      class="fixed top-4 right-4 z-50 w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-lg text-2xl text-gray-700 hover:bg-gray-100 hover:scale-110 transition-all duration-200"
+      aria-label="Cerrar menú"
+    >
+      ✕
+    </button>
+
+    <!-- Menu Content -->
+    <div class="px-6 pt-20 pb-8">
+      <nav class="flex flex-col space-y-4">
+        {navLinksMobile.map((link, index) => (
+          <a 
+            href={link.href}
+            class:list={[
+              "mobile-link block py-5 px-6 rounded-2xl text-lg font-sans font-semibold text-center transition-all duration-300 transform shadow-md",
+              "bg-accent-red text-white hover:bg-red-700 hover:shadow-xl hover:scale-[1.02]"
+            ]}
+            style={`--index: ${index}; --delay: ${index * 80}ms`}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  /* ========== DESKTOP NAV ========== */
+
+  /* Staggered fade-in for desktop links */
+  .nav-link {
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: navFadeIn 0.4s ease forwards;
+    animation-delay: var(--delay);
+  }
+
+  @keyframes navFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ========== MOBILE MENU ========== */
+
+  /* Staggered animation for mobile links - all red */
+  .mobile-link {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-menu-open .mobile-link {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* ========== HEADER SCROLL EFFECTS ========== */
+
+  /* Header scrolled state */
+  .header-scrolled {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(16px) !important;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15), 0 1px 3px rgba(212, 175, 55, 0.1) !important;
+  }
+
+  /* Header hidden (YouTube-style) */
+  .header-hidden {
+    transform: translateY(-100%);
+  }
+
+  /* ========== LOGO PULSE ========== */
+
+  @keyframes logoPulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 4px 6px -1px rgba(206, 32, 41, 0.25);
+    }
+    50% {
+      transform: scale(1.04);
+      box-shadow: 0 6px 12px -2px rgba(206, 32, 41, 0.35);
+    }
+  }
+
+  .logo-pulse {
+    animation: logoPulse 3.5s ease-in-out infinite;
+    animation-delay: 3s;
+  }
+</style>
+
 <script>
-  const menuBtn = document.getElementById('mobile-menu-btn')
-  const mobileMenu = document.getElementById('mobile-menu')
-  const menuLinks = mobileMenu?.querySelectorAll('a')
-  
-  menuBtn?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden')
-  })
-  
-  menuLinks?.forEach(link => {
-    link.addEventListener('click', () => {
+  function initHeader() {
+    const header = document.getElementById('main-header')
+    const menuBtn = document.getElementById('mobile-menu-btn')
+    const closeBtn = document.getElementById('close-menu-btn')
+    const mobileMenu = document.getElementById('mobile-menu')
+    const menuLinks = mobileMenu?.querySelectorAll('.mobile-link')
+    const body = document.body
+
+    let lastScrollY = 0
+    let ticking = false
+
+    // ========== SMART NAVBAR (YouTube-style) ==========
+    function updateHeader() {
+      const currentScrollY = window.scrollY
+      
+      // Scrolled state
+      if (currentScrollY > 50) {
+        header?.classList.add('header-scrolled')
+      } else {
+        header?.classList.remove('header-scrolled')
+      }
+
+      // Hide/show on scroll direction (YouTube-style)
+      if (currentScrollY > lastScrollY && currentScrollY > 150) {
+        header?.classList.add('header-hidden')
+      } else {
+        header?.classList.remove('header-hidden')
+      }
+
+      lastScrollY = currentScrollY
+      ticking = false
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeader)
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    // ========== MOBILE MENU ==========
+    
+    function openMenu() {
+      mobileMenu?.classList.remove('hidden')
+      body.classList.add('mobile-menu-open')
+      document.body.style.overflow = 'hidden'
+      
+      // Trigger staggered animations
+      requestAnimationFrame(() => {
+        menuLinks?.forEach((link, index) => {
+          const el = link as HTMLElement
+          el.style.transitionDelay = `${index * 80}ms`
+        })
+      })
+    }
+
+    function closeMenu() {
       mobileMenu?.classList.add('hidden')
+      body.classList.remove('mobile-menu-open')
+      document.body.style.overflow = ''
+    }
+
+    // Event listeners
+    menuBtn?.addEventListener('click', openMenu)
+    closeBtn?.addEventListener('click', closeMenu)
+
+    // Close on link click
+    menuLinks?.forEach(link => {
+      link.addEventListener('click', closeMenu)
     })
-  })
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu()
+    })
+
+    // Close on backdrop click
+    const backdrop = document.getElementById('mobile-backdrop')
+    backdrop?.addEventListener('click', closeMenu)
+
+    // Initial state
+    updateHeader()
+  }
+
+  // Initialize on page load
+  initHeader()
+
+  // Re-initialize after View Transitions
+  document.addEventListener('astro:after-swap', initHeader)
 </script>

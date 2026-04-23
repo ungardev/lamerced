@@ -1,6 +1,8 @@
 ---
 import Header from '@/components/layout/Header.astro'
 import Footer from '@/components/layout/Footer.astro'
+import LenisScroll from '@/components/LenisScroll.astro'
+import { ClientRouter } from 'astro:transitions'
 import '@/styles/globals.css'
 import '@/scripts/animations.ts'
 
@@ -29,6 +31,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     
+    <!-- View Transitions -->
+    <ClientRouter />
+    
     <!-- Primary Meta Tags -->
     <title>{title} | U.E.P. Colegio "La Merced"</title>
     <meta name="title" content={`${title} | U.E.P. Colegio "La Merced"`} />
@@ -53,10 +58,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
     <!-- Canonical -->
     <link rel="canonical" href={canonicalURL} />
     
-    <!-- Fonts -->
+    <!-- Fonts: Playfair Display + Inter with font-display swap for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      @font-face {
+        font-family: 'Playfair Display';
+        font-display: swap;
+        src: url('https://fonts.gstatic.com/s/playfairdisplay/v37/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDXbtM.woff2') format('woff2');
+        font-weight: 400 700;
+      }
+    </style>
     
     <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="U.E.P. Colegio La Merced - Blog" href="/rss.xml" />
@@ -68,5 +81,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
       <slot />
     </main>
     <Footer />
+    <LenisScroll />
   </body>
 </html>
