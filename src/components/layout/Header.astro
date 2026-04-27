@@ -28,7 +28,7 @@ const navLinksMobile = [
 
 <header 
   id="main-header"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gold/30"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-100"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
     <!-- Mobile: centered logo + hamburger right | Desktop: logo left + nav right -->
@@ -99,13 +99,13 @@ const navLinksMobile = [
 
     <!-- Menu Content - Slide from right -->
     <div id="menu-panel" class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform translate-x-full">
-      <div class="px-6 pt-20 pb-8">
-        <nav class="flex flex-col space-y-4">
+      <div class="px-5 pt-20 pb-8">
+        <nav class="flex flex-col space-y-3">
           {navLinksMobile.map((link, index) => (
             <a 
               href={link.href}
               class:list={[
-                "mobile-link block py-5 px-6 rounded-2xl text-lg font-sans font-semibold text-center transition-all duration-300 transform shadow-md",
+                "mobile-link block py-4 px-5 rounded-2xl text-base font-sans font-semibold text-center transition-all duration-300 transform shadow-md",
                 "bg-accent-red text-white hover:bg-red-700 hover:shadow-xl hover:scale-[1.02]"
               ]}
               style={`--index: ${index}; --delay: ${index * 80}ms`}

@@ -51,7 +51,7 @@ if (typeof window !== 'undefined') {
       const scrolled = window.pageYOffset;
       parallaxElements.forEach((el) => {
         const speed = parseFloat(el.getAttribute('data-parallax') || '0.1');
-        el.style.transform = `translateY(${scrolled * speed}px)`;
+        (el as HTMLElement).style.transform = `translateY(${scrolled * speed}px)`;
       });
     });
   }
