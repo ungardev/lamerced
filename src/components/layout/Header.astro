@@ -93,17 +93,21 @@ const navLinksMobile = [
     <!-- Menu Content - Slide from right -->
     <div id="menu-panel" class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white/95 backdrop-blur-xl shadow-2xl transform translate-x-full flex flex-col">
       
-      <!-- Header with Logo -->
-      <div class="flex flex-row items-center justify-center pt-4 pb-3 gap-2 border-b border-gray-100">
-        <img 
-          src="/logolamercedpro.svg" 
-          alt="U.E.P. Colegio La Merced" 
-          style="height: 2rem; width: auto; object-fit: contain; flex-shrink: 0;"
-        />
-        <span class="font-montserrat text-sm font-extrabold uppercase tracking-tight text-accent-red">
-          LA MERCED
-        </span>
-      </div>
+      <!-- Header with Logo and Close Button -->
+      <div class="flex flex-row items-center justify-between pt-4 pb-3 px-4 border-b border-gray-100">
+        <!-- Logo + Title -->
+        <div class="flex flex-row items-center gap-2">
+          <img 
+            src="/logolamercedpro.svg" 
+            alt="U.E.P. Colegio La Merced" 
+            style="height: 2rem; width: auto; object-fit: contain; flex-shrink: 0;"
+          />
+          <span class="font-montserrat text-sm font-extrabold uppercase tracking-tight text-accent-red">
+            LA MERCED
+          </span>
+</div>
+  </div>
+</div>
 
       <!-- Navigation Links - Clean Link Style -->
       <nav class="flex-1 overflow-y-auto py-4 px-5">
@@ -260,7 +264,7 @@ const navLinksMobile = [
   }
 
   body.mobile-menu-opening #close-menu-btn {
-    animation: closeBtnIn 0.2s ease-out 0.2s forwards;
+    animation: closeBtnIn 0.2s ease-out 0.15s forwards;
   }
 
   body.mobile-menu-opening #menu-panel {
