@@ -101,7 +101,15 @@ const navLinksMobile = [
 
     <!-- Menu Content - Slide from right -->
     <div id="menu-panel" class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform translate-x-full">
-      <div class="px-5 pt-20 pb-8">
+      <!-- Logo centered at top of menu -->
+      <div class="flex justify-center pt-16 pb-6">
+        <img 
+          src="/logolamercedpro.svg" 
+          alt="U.E.P. Colegio La Merced" 
+          class="w-20 h-20 object-contain"
+        />
+      </div>
+      <div class="px-5 pb-8">
         <nav class="flex flex-col space-y-3">
           {navLinksMobile.map((link, index) => (
             <a 
