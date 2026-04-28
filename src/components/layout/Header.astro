@@ -91,34 +91,34 @@ const navLinksMobile = [
   <!-- Contenido -->
   <div class="relative z-10 h-full">
     <!-- Close Button - Unicode X, Simple and Clean -->
-    <button 
+<button 
       id="close-menu-btn"
-      class="fixed top-4 right-4 z-50 w-12 h-12 flex items-center justify-center bg-white rounded-full shadow-lg text-2xl text-gray-700 hover:bg-gray-100 hover:scale-110 transition-all duration-200 opacity-0"
+      class="fixed top-2 right-2 z-50 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-lg text-xl text-gray-700 hover:bg-gray-100 hover:scale-110 transition-all duration-200 opacity-0"
       aria-label="Cerrar menú"
     >
       ✕
     </button>
 
-<!-- Menu Content - Slide from right -->
+    <!-- Menu Content - Slide from right -->
       <div id="menu-panel" class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform translate-x-full">
         <!-- Logo centered at top of menu, aligned with close button -->
-        <div class="flex flex-col items-center pt-8 pb-6">
+        <div class="flex flex-row items-center justify-center pt-2 pb-2 gap-2">
           <img 
             src="/logolamercedpro.svg" 
             alt="U.E.P. Colegio La Merced" 
-            style="height: 5rem; width: auto; object-fit: contain; flex-shrink: 0; aspect-ratio: 654 / 1228;"
+            style="height: 2.5rem; width: auto; object-fit: contain; flex-shrink: 0;"
           />
-          <span class="font-montserrat text-xl font-extrabold uppercase tracking-tight text-accent-red pt-3" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.15);">
+          <span class="font-montserrat text-sm font-extrabold uppercase tracking-tight text-accent-red" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.15);">
             LA MERCED
           </span>
         </div>
-      <div class="px-5 pb-8">
-        <nav class="flex flex-col space-y-3">
+      <div class="px-4 pb-4">
+        <nav class="flex flex-col space-y-2">
           {navLinksMobile.map((link, index) => (
             <a 
               href={link.href}
               class:list={[
-                "mobile-link block py-4 px-5 rounded-2xl text-base font-sans font-semibold text-center transition-all duration-300 transform shadow-md",
+                "mobile-link block py-2 px-4 rounded-xl text-sm font-sans font-semibold text-center transition-all duration-300 transform shadow-md",
                 "bg-accent-red text-white hover:bg-red-700 hover:shadow-xl hover:scale-[1.02]"
               ]}
               style={`--index: ${index}; --delay: ${index * 80}ms`}
