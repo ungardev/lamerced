@@ -8,6 +8,7 @@ const days = [
   { id: 'jueves', label: 'Jueves' },
   { id: 'viernes', label: 'Viernes' },
   { id: 'sabado', label: 'Sábado' },
+  { id: 'domingo', label: 'Domingo' },
 ]
 
 const scheduleData: Record<string, Array<{ time: string; activity: string; type: 'clase' | 'taller' | 'evento' | 'formacion' | 'almuerzo' }>> = {
@@ -48,10 +49,15 @@ const scheduleData: Record<string, Array<{ time: string; activity: string; type:
     { time: '2:00 - 4:00', activity: 'Círculo de estudio y tarea dirigida', type: 'taller' },
   ],
   sabado: [
-    { time: '8:00 - 9:00', activity: 'Misa dominical (opcional)', type: 'formacion' },
     { time: '9:00 - 12:00', activity: 'Actividades especiales / Competencias deportivas', type: 'evento' },
     { time: '12:00 - 1:00', activity: 'Almuerzo comunitario', type: 'almuerzo' },
     { time: '1:00 - 3:00', activity: 'Talleres culturales (arte, teatro)', type: 'taller' },
+  ],
+  domingo: [
+    { time: '8:00 - 9:00', activity: 'Misa dominical', type: 'formacion' },
+    { time: '9:00 - 12:00', activity: 'Tiempo en familia', type: 'evento' },
+    { time: '12:00 - 2:00', activity: 'Almuerzo familiar', type: 'almuerzo' },
+    { time: '2:00 - 6:00', activity: 'Descanso y actividades personales', type: 'evento' },
   ],
 }
 ---
