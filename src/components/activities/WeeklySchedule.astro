@@ -1,0 +1,142 @@
+---
+import ScheduleDay from './ScheduleDay.astro'
+
+const days = [
+  { id: 'lunes', label: 'Lunes' },
+  { id: 'martes', label: 'Martes' },
+  { id: 'miercoles', label: 'Miércoles' },
+  { id: 'jueves', label: 'Jueves' },
+  { id: 'viernes', label: 'Viernes' },
+  { id: 'sabado', label: 'Sábado' },
+]
+
+const scheduleData: Record<string, Array<{ time: string; activity: string; type: 'clase' | 'taller' | 'evento' | 'formacion' | 'almuerzo' }>> = {
+  lunes: [
+    { time: '7:00 - 7:30', activity: 'Formación y oración matutina', type: 'formacion' },
+    { time: '7:30 - 12:00', activity: 'Clases académicas (Bloque 1)', type: 'clase' },
+    { time: '12:00 - 1:00', activity: 'Almuerzo', type: 'almuerzo' },
+    { time: '1:00 - 2:30', activity: 'Clases académicas (Bloque 2)', type: 'clase' },
+    { time: '2:30 - 4:00', activity: 'Taller de música y coro', type: 'taller' },
+  ],
+  martes: [
+    { time: '7:00 - 7:30', activity: 'Formación y oración matutina', type: 'formacion' },
+    { time: '7:30 - 12:00', activity: 'Clases académicas (Bloque 1)', type: 'clase' },
+    { time: '12:00 - 1:00', activity: 'Almuerzo', type: 'almuerzo' },
+    { time: '1:00 - 2:30', activity: 'Clases académicas (Bloque 2)', type: 'clase' },
+    { time: '2:30 - 4:00', activity: 'Prácticas deportivas (Fútbol, Atletismo)', type: 'taller' },
+  ],
+  miercoles: [
+    { time: '7:00 - 7:30', activity: 'Formación y oración matutina', type: 'formacion' },
+    { time: '7:30 - 12:00', activity: 'Clases académicas (Bloque 1)', type: 'clase' },
+    { time: '12:00 - 1:00', activity: 'Almuerzo', type: 'almuerzo' },
+    { time: '1:00 - 2:30', activity: 'Clases académicas (Bloque 2)', type: 'clase' },
+    { time: '2:30 - 3:30', activity: 'Taller de música (Instrumentos)', type: 'taller' },
+    { time: '3:30 - 4:00', activity: 'Club de lectura y literatura', type: 'taller' },
+  ],
+  jueves: [
+    { time: '7:00 - 7:30', activity: 'Formación y oración matutina', type: 'formacion' },
+    { time: '7:30 - 12:00', activity: 'Clases académicas (Bloque 1)', type: 'clase' },
+    { time: '12:00 - 1:00', activity: 'Almuerzo', type: 'almuerzo' },
+    { time: '1:00 - 2:30', activity: 'Clases académicas (Bloque 2)', type: 'clase' },
+    { time: '2:30 - 4:00', activity: 'Prácticas deportivas (Softball, Básquet)', type: 'taller' },
+  ],
+  viernes: [
+    { time: '7:00 - 7:30', activity: 'Formación y oración matutina', type: 'formacion' },
+    { time: '7:30 - 12:00', activity: 'Clases académicas (Bloque 1)', type: 'clase' },
+    { time: '12:00 - 1:00', activity: 'Almuerzo', type: 'almuerzo' },
+    { time: '1:00 - 2:00', activity: 'Formación en valores mercedarios', type: 'formacion' },
+    { time: '2:00 - 4:00', activity: 'Círculo de estudio y tarea dirigida', type: 'taller' },
+  ],
+  sabado: [
+    { time: '8:00 - 9:00', activity: 'Misa dominical (opcional)', type: 'formacion' },
+    { time: '9:00 - 12:00', activity: 'Actividades especiales / Competencias deportivas', type: 'evento' },
+    { time: '12:00 - 1:00', activity: 'Almuerzo comunitario', type: 'almuerzo' },
+    { time: '1:00 - 3:00', activity: 'Talleres culturales (arte, teatro)', type: 'taller' },
+  ],
+}
+---
+
+<section class="mt-16 border-t border-gray-100 pt-12">
+  <div class="text-center mb-8">
+    <h2 class="font-sans text-2xl md:text-3xl font-medium text-foreground mb-3">
+      Cronograma Semanal
+    </h2>
+    <p class="text-sm text-muted-foreground">
+      Horario regular de actividades académicas y extracurriculares
+    </p>
+  </div>
+
+  <!-- Day Tabs -->
+  <div class="flex flex-wrap justify-center gap-2 mb-6">
+    {days.map((day) => (
+      <button
+        data-day-tab={day.id}
+        class:list={[
+          "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+          "bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200"
+        ]}
+      >
+        {day.label}
+      </button>
+    ))}
+  </div>
+
+  <!-- Schedule Days -->
+  <div id="schedule-container" class="max-w-3xl mx-auto">
+    {days.map((day, index) => (
+      <ScheduleDay 
+        day={day.id}
+        dayLabel={day.label}
+        items={scheduleData[day.id]}
+        isActive={index === 0}
+      />
+    ))}
+  </div>
+
+  <!-- Legend -->
+  <div class="flex flex-wrap justify-center gap-3 mt-8 text-xs">
+    <span class="px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100">Clase</span>
+    <span class="px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-100">Taller</span>
+    <span class="px-2.5 py-1 rounded-full bg-green-50 text-green-700 border border-green-100">Evento</span>
+    <span class="px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-100">Formación</span>
+    <span class="px-2.5 py-1 rounded-full bg-gray-50 text-gray-500 border border-gray-100">Almuerzo</span>
+  </div>
+</section>
+
+<script>
+  function initScheduleTabs() {
+    const buttons = document.querySelectorAll('[data-day-tab]')
+    const days = document.querySelectorAll('.schedule-day')
+    
+    buttons.forEach((button, buttonIndex) => {
+      button.addEventListener('click', () => {
+        const dayId = button.getAttribute('data-day-tab')
+        
+        // Update active button
+        buttons.forEach((btn, idx) => {
+          if (idx === buttonIndex) {
+            btn.classList.remove('bg-gray-50', 'text-gray-600', 'border', 'border-gray-200', 'hover:bg-gray-100')
+            btn.classList.add('bg-accent-red', 'text-white')
+          } else {
+            btn.classList.remove('bg-accent-red', 'text-white')
+            btn.classList.add('bg-gray-50', 'text-gray-600', 'border', 'border-gray-200', 'hover:bg-gray-100')
+          }
+        })
+        
+        // Show correct day
+        days.forEach((day, dayIndex) => {
+          if (day.getAttribute('data-day') === dayId) {
+            day.classList.remove('hidden', 'opacity-0', 'scale-95')
+            day.classList.add('block', 'opacity-100', 'scale-100')
+          } else {
+            day.classList.remove('block', 'opacity-100', 'scale-100')
+            day.classList.add('hidden', 'opacity-0', 'scale-95')
+          }
+        })
+      })
+    })
+  }
+  
+  initScheduleTabs()
+  document.addEventListener('astro:after-swap', initScheduleTabs)
+</script>

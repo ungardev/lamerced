@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import ActivityCard from '@/components/activities/ActivityCard.astro'
 import CategoryTabs from '@/components/activities/CategoryTabs.astro'
+import WeeklySchedule from '@/components/activities/WeeklySchedule.astro'
 import { getCollection } from 'astro:content'
 
 const activities = await getCollection('actividades')
@@ -58,6 +59,9 @@ const categories = ['deportivo', 'evento', 'cultural']
           </p>
         </div>
       )}
+
+      <!-- Weekly Schedule Section -->
+      <WeeklySchedule />
     </div>
   </section>
 </BaseLayout>
