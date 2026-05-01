@@ -1,0 +1,68 @@
+---
+interface Props {
+  activeCategory: string
+  categories: string[]
+}
+
+const { activeCategory, categories } = Astro.props
+
+const allCategories = ['todos', ...categories]
+---
+
+<div class="flex flex-wrap justify-center gap-2 mb-10">
+  {allCategories.map((cat) => (
+    <button
+      data-category={cat}
+      class:list={[
+        "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200",
+        activeCategory === cat
+          ? "bg-accent-red text-white shadow-md"
+          : "bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200"
+      ]}
+    >
+      {cat.charAt(0).toUpperCase() + cat.slice(1)}
+    </button>
+  ))}
+</div>
+
+<script>
+  function initCategoryTabs() {
+    const buttons = document.querySelectorAll('[data-category]')
+    const cards = document.querySelectorAll('[data-activity-category]')
+    
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category')
+        
+        // Update active button
+        buttons.forEach(btn => {
+          if (btn.getAttribute('data-category') === category) {
+            btn.classList.remove('bg-gray-50', 'text-gray-600', 'border', 'border-gray-200', 'hover:bg-gray-100')
+            btn.classList.add('bg-accent-red', 'text-white', 'shadow-md')
+          } else {
+            btn.classList.remove('bg-accent-red', 'text-white', 'shadow-md')
+            btn.classList.add('bg-gray-50', 'text-gray-600', 'border', 'border-gray-200', 'hover:bg-gray-100')
+          }
+        })
+        
+        // Filter cards
+        cards.forEach(card => {
+          const cardCategory = card.getAttribute('data-activity-category')
+          
+          if (category === 'todos' || cardCategory === category) {
+            (card as HTMLElement).style.display = 'block'
+            card.classList.remove('opacity-0', 'scale-95')
+            card.classList.add('opacity-100', 'scale-100')
+          } else {
+            (card as HTMLElement).style.display = 'none'
+            card.classList.remove('opacity-100', 'scale-100')
+            card.classList.add('opacity-0', 'scale-95')
+          }
+        })
+      })
+    })
+  }
+  
+  initCategoryTabs()
+  document.addEventListener('astro:after-swap', initCategoryTabs)
+</script>

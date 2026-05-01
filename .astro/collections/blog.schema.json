@@ -43,7 +43,8 @@
         "title",
         "description",
         "pubDate",
-        "author"
+        "author",
+        "tags"
       ],
       "additionalProperties": false
     }

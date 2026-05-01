@@ -1,0 +1,63 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import ActivityCard from '@/components/activities/ActivityCard.astro'
+import CategoryTabs from '@/components/activities/CategoryTabs.astro'
+import { getCollection } from 'astro:content'
+
+const activities = await getCollection('actividades')
+const sortedActivities = activities.sort((a, b) => a.data.date.getTime() - b.data.date.getTime())
+
+const categories = ['deportivo', 'evento', 'cultural']
+---
+
+<BaseLayout title="Actividades" description="Descubre todas las actividades deportivas, eventos y actividades culturales del U.E.P. Colegio La Merced. Calendario de eventos, cronograma semanal y más.">
+  <section class="section-padding pt-24 md:pt-32 bg-gradient-to-b from-white via-gray-50 to-white w-full max-w-full overflow-hidden">
+    <div class="container-custom w-full max-w-full">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-red/10 text-accent-red text-sm font-medium mb-4">
+          <span class="w-2 h-2 rounded-full bg-accent-red animate-pulse"></span>
+          Año Escolar 2025-2026
+        </span>
+        <h1 class="font-sans text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-6">
+          Actividades
+        </h1>
+        <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Torneos deportivos, eventos especiales, celebraciones culturales y cronograma semanal. 
+          Mantente al día con todo lo que sucede en nuestra comunidad educativa.
+        </p>
+      </div>
+
+      <!-- Category Tabs -->
+      <CategoryTabs activeCategory="todos" categories={categories} />
+
+      <!-- Activities Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortedActivities.map((activity) => (
+          <div data-activity-category={activity.data.category}>
+            <ActivityCard 
+              title={activity.data.title}
+              description={activity.data.description}
+              category={activity.data.category}
+              subcategory={activity.data.subcategory}
+              date={activity.data.date}
+              endDate={activity.data.endDate}
+              time={activity.data.time}
+              location={activity.data.location}
+              image={activity.data.image}
+              featured={activity.data.featured}
+            />
+          </div>
+        ))}
+      </div>
+
+      {sortedActivities.length === 0 && (
+        <div class="text-center py-16">
+          <p class="text-muted-foreground text-lg">
+            Próximamente más actividades y eventos.
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

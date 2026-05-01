@@ -1,0 +1,84 @@
+{
+  "$ref": "#/definitions/actividades",
+  "definitions": {
+    "actividades": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "deportivo",
+            "evento",
+            "cultural"
+          ]
+        },
+        "subcategory": {
+          "type": "string"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "endDate": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "time": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "category",
+        "subcategory",
+        "date"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

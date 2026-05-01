@@ -7,6 +7,7 @@ const { variant = 'transparent' } = Astro.props
 
 const navLinksDesktop = [
   { label: 'Nosotros', href: '/#nosotros' },
+  { label: 'Actividades', href: '/actividades' },
   { label: 'Valores', href: '/#valores' },
   { label: 'Galería', href: '/#galeria' },
   { label: 'Testimonios', href: '/#testimonios' },
@@ -17,6 +18,7 @@ const navLinksDesktop = [
 const navLinksMobile = [
   { label: 'Home', href: '/' },
   { label: 'Nosotros', href: '/#nosotros' },
+  { label: 'Actividades', href: '/actividades' },
   { label: 'Valores', href: '/#valores' },
   { label: 'Galería', href: '/#galeria' },
   { label: 'Testimonios', href: '/#testimonios' },
@@ -120,7 +122,7 @@ const navLinksMobile = [
     <!-- Navigation Links - Clean Link Style -->
     <nav class="flex-1 overflow-y-auto py-4 px-5">
       <div class="space-y-1">
-        {navLinksMobile.slice(0, 6).map((link, index) => (
+        {navLinksMobile.map((link, index) => (
           <a 
             href={link.href}
             class:list={[
