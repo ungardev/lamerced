@@ -43,7 +43,7 @@ const navLinksMobile = [
           alt="U.E.P. Colegio La Merced" 
           class="w-10 h-10 md:w-12 md:h-12 object-contain"
         />
-        <span class="hidden lg:block font-montserrat text-lg md:text-xl lg:text-2xl font-extrabold uppercase tracking-tight text-accent-red" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.15);">
+        <span class="hidden lg:block font-montserrat text-lg md:text-xl lg:text-2xl font-extrabold uppercase tracking-tight text-accent-red" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.08);">
           LA MERCED
         </span>
       </a>
@@ -68,7 +68,7 @@ const navLinksMobile = [
 
       <!-- Mobile Menu Button - Right side -->
       <button 
-        class="lg:hidden absolute right-4 p-3 text-gray-700 hover:text-accent-red transition-colors"
+        class="lg:hidden absolute right-4 p-3 text-gray-700 hover:text-accent-red focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-red/50 focus-visible:bg-gray-50 active:bg-gray-100 transition-all duration-200"
         aria-label="Abrir menú"
         id="mobile-menu-btn"
       >
@@ -387,6 +387,7 @@ const navLinksMobile = [
       })
       
       setTimeout(() => {
+        menuBtn?.blur()
         mobileMenu?.classList.add('hidden')
         body.classList.remove('mobile-menu-closing')
       }, 350)
