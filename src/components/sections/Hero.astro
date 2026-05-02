@@ -4,7 +4,7 @@ import { Image } from 'astro:assets'
 import heroImage from '@/assets/hero.avif'
 ---
 
-<section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-gray-50 to-gray-100 w-full max-w-full">
+<section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-white w-full max-w-full">
   <!-- LCP Optimized Background Image with Astro Image component -->
   <div class="absolute inset-0 z-0">
     <Image 
@@ -18,8 +18,8 @@ import heroImage from '@/assets/hero.avif'
       quality={80}
       format="avif"
     />
-    <!-- Gradient overlay: white to transparent for better text readability -->
-    <div class="absolute inset-0 bg-gradient-to-b from-white via-white/85 to-white/60"></div>
+    <!-- Gradient overlay: pure white top for notch consistency -->
+    <div class="absolute inset-0 bg-gradient-to-b from-white/95 via-white/80 to-white/40"></div>
   </div>
   
   <!-- Subtle grid pattern -->
