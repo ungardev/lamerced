@@ -30,7 +30,7 @@ const navLinksMobile = [
 
 <header 
   id="main-header"
-  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-100"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-200"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
     <!-- Mobile: centered logo + hamburger right | Desktop: logo left + nav right -->
@@ -68,7 +68,7 @@ const navLinksMobile = [
 
       <!-- Mobile Menu Button - Right side -->
       <button 
-        class="lg:hidden absolute right-4 p-2 text-gray-700 hover:text-accent-red transition-colors"
+        class="lg:hidden absolute right-4 p-3 text-gray-700 hover:text-accent-red transition-colors"
         aria-label="Abrir menú"
         id="mobile-menu-btn"
       >
@@ -88,10 +88,10 @@ const navLinksMobile = [
   class="lg:hidden hidden fixed inset-0 z-50"
 >
   <!-- Backdrop - Glassmorphism blur -->
-  <div id="mobile-backdrop" class="absolute inset-0 bg-black/30 backdrop-blur-xl opacity-0"></div>
+  <div id="mobile-backdrop" class="absolute inset-0 bg-black/40 opacity-0"></div>
   
   <!-- Menu Content - Slide from right -->
-  <div id="menu-panel" class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white/95 backdrop-blur-xl shadow-2xl transform translate-x-full flex flex-col">
+  <div id="menu-panel" class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform translate-x-full flex flex-col">
     
     <!-- Header with Logo and Close Button -->
     <div class="relative flex items-center justify-center px-4 pt-5 pb-4 min-h-[4.5rem]">
@@ -303,8 +303,6 @@ const navLinksMobile = [
   /* ========== HEADER SCROLL EFFECTS ========== */
 
   .header-scrolled {
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(16px) !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
   }
 
